@@ -1,18 +1,18 @@
 const ctrlHome = {};
 
 ctrlHome.rutaGet = (req, res) => {
-    res.send({msg: 'Ruta Get'})
+    res.send('Peticion GET')
 };
 ctrlHome.rutaPost = (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
 
-    res.send(req.body)
+    res.send('Petecion POST')
 };
 ctrlHome.rutaPut = (req, res) => {
-    res.send('PUT')
+    res.send('Peticion PUT')
 };
 ctrlHome.rutaDelete = (req, res) => {
-    res.send('DELETE')
+    res.send('Peticion DELETE')
 };
 
 module.exports = ctrlHome

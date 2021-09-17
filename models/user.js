@@ -9,6 +9,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    activo: {
+        type: Boolean,
+        default: true
+    }
 });
 
 module.exports = model('User', UserSchema)

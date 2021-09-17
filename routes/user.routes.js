@@ -3,7 +3,6 @@ const {
     rutaGet, rutaPost, rutaPut, rutaDelete 
 } = require('../controllers/user.controllers')
 
-
 router.get('/', rutaGet)
 
 router.post('/', rutaPost)
