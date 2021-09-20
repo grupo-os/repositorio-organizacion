@@ -2,15 +2,17 @@ const { urlencoded } = require('express');
 const express = require('express');
 require('dotenv').config();
 const app = express();
+
+// Connection to database...
 const conectarDB = require('./database');
-conectarDB()
+conectarDB();
 
 //Middlewares...
 app.use(express.json());
 app.use(express.urlencoded({extended: false})); 
 
-// //Settings...
-// app.set('port', process.env.PORT || 4000);
+//Settings...
+app.set('port', process.env.PORT || 4000);
 
 //Routes...
 app.use(require('./routes/user.routes')); 
