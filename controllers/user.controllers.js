@@ -1,4 +1,5 @@
 const ctrlHome = {};
+const { request, response } = require('express');
 const User = require('../models/user');
 
 
@@ -28,17 +29,16 @@ ctrlHome.rutaPost = async (req, res) => {
 };
 
 // Controlador que actualiza la informacion de los usuarios...
-ctrlHome.rutaPut = async (req, res) => {
+ctrlHome.rutaPut = async (req = request, res = response) => {
+    // const {username, password, id} = req.body;
 
-    const {username, password, id} = req.body;
+    const { id } = req.params;
+    const { username, password, role, ...restoDeDatos} = req.body
+
     try {
+        const user = await User.findByIdAndUpdate(id, {username, password, role}, {new: true});
 
-        const user = await User.findByIdAndUpdate(id, {username, password}, {new: true});
-
-        return res.json({
-            msg: 'Usuario actualizado correctamente',
-            user
-        });
+        return res.json(user);
     } catch (error) {
         console.log('Error al actualizar usuario: ', error);
     }

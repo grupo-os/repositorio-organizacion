@@ -1,5 +1,6 @@
 const { urlencoded } = require('express');  
 const express = require('express');
+const morgan = require('morgan');
 require('dotenv').config();
 const app = express();
 
@@ -8,6 +9,7 @@ const conectarDB = require('./database');
 conectarDB();
 
 //Middlewares...
+app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended: false})); 
 
