@@ -12,6 +12,10 @@ const UserSchema = new Schema({
     activo: {
         type: Boolean,
         default: true
+    },
+    role: {
+        type: String,
+        required: true
     }
 });
 

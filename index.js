@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const app = express();
 
-// Connection to database...
+// Database Connection...
 const conectarDB = require('./database');
 conectarDB();
 

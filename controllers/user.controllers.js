@@ -1,6 +1,7 @@
 const ctrlHome = {};
 const User = require('../models/user');
 
+
 // Devuelve todos los usuarios de la conexion...
 ctrlHome.rutaGet = async (req, res) => {
     const users = await User.find({activo: true}); //Consulta todos los documentos...
@@ -11,12 +12,13 @@ ctrlHome.rutaGet = async (req, res) => {
 
 // Controlador que almacena un nuevo usuario...
 ctrlHome.rutaPost = async (req, res) => {
-    const {username, password} = req.body;
+
+    const {username, password, role} = req.body;
 
     try {
-        const user = new User({username, password});
+        const user = new User({ username, password, role });
         await user.save();
-        return res.json({msg: 'Usuario creado correctamente'});
+        return res.json({ msg: 'Usuario creado correctamente', user });
 
     } catch (error) {
 
