@@ -4,6 +4,8 @@ const {
 } = require('../controllers/user.controllers');
 const { body } = require('express-validator');
 const { validarCampos } = require('../helpers/validacionCampos');
+const { existeRole } = require('../middlewares/validaciones');
+
 
 // Ruta que muestra todos los usuarios de la coleccion...
 router.get('/find-user', rutaGet);
@@ -11,9 +13,18 @@ router.get('/find-user', rutaGet);
 // Ruta para agregar un nuevo usuario...
 router.post(
     '/create-user',
-    body('username', 'El email ingresado no posee el formato correcto').isEmail(),
-    body('password', 'La contraseña debe tener como mínimo 8 caracteres').isLength({ min: 8 }),
-    body('role', 'El rol seleccionado no está permitido').isIn(['admin_user', 'common_user']),
+    
+    body('username', 'El email ingresado no posee el formato correcto')
+    .isEmail(),
+
+    body('password', 'La contraseña debe tener como mínimo 8 caracteres')
+    .isLength({ min: 8 })
+    .not()
+    .isEmpty(),
+
+    body('role', 'El rol seleccionado no está permitido') 
+    .custom(existeRole),
+
     validarCampos, 
     rutaPost
 );

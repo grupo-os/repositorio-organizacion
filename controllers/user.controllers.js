@@ -19,7 +19,7 @@ ctrlHome.rutaPost = async (req, res) => {
     try {
         const user = new User({ username, password, role });
         await user.save();
-        return res.json({ msg: 'Usuario creado correctamente', user });
+        return res.json(user);
 
     } catch (error) {
 
