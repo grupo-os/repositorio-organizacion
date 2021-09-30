@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false})); 
 
 //Settings...
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.PORT || 5000);
 
 //Routes...
 app.use(require('./routes/user.routes')); 

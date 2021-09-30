@@ -32,10 +32,18 @@ router.post(
 // Ruta para editar usuarios...
 router.put(
     '/edit-user/:id', 
-    body('username', 'El email ingresado no posee el formato correcto').isEmail(),
-    body('password', 'La contraseña debe tener como mínimo 8 caracteres').isLength({ min: 8 }),
-    body('role', 'El rol seleccionado no está permitido').isIn(['admin_user', 'common_user']),
-    body('id', 'No es un id de MongoDB válido').isMongoId(),
+    body('username', 'El email ingresado no posee el formato correcto')
+    .isEmail(),
+
+    body('password', 'La contraseña debe tener como mínimo 8 caracteres')
+    .isLength({ min: 8 }),
+
+    body('role', 'El rol seleccionado no está permitido')
+    .isIn(['admin_user', 'common_user']),
+
+    body('id', 'No es un id de MongoDB válido')
+    .isMongoId(),
+    
     validarCampos,
     rutaPut
 );
