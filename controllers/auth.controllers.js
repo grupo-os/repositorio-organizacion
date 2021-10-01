@@ -1,17 +1,14 @@
 const User = require('../models/user');
 const ctrlAuth = {};
 const { generarJWT } = require('../helpers/generarJWT');
-// const jwt = require('jsonwebtoken');
+
 
 ctrlAuth.login = async (req, res) => {
     
     const { username, password } = req.body; // Datos enviados por el cliente...
     
-    const usuario = await User.find(user => {
-
-        return user.username === username && user.password === password;
-    }); //Se busca al usuario en la base de datos...
-
+    const usuario = await User.findOne({username}); //Se busca al usuario en la base de datos...
+    console.log(usuario);
     // Verificamos si el usuario existe...
     if (!usuario) {
         return res.status(401).json({
@@ -27,7 +24,7 @@ ctrlAuth.login = async (req, res) => {
     };
 
     // Si el usuario existe...
-    const token = await generarJWT(usuario.uid)
+    const token = await generarJWT(usuario.id)
     return res.json({
         token,
         usuario

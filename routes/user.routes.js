@@ -5,6 +5,7 @@ const {
 const { body } = require('express-validator');
 const { validarCampos } = require('../helpers/validacionCampos');
 const { existeRole } = require('../middlewares/validaciones');
+const { validar_jwt } = require('../middlewares/validarJWT');
 
 
 // Ruta que muestra todos los usuarios de la coleccion...
@@ -27,7 +28,7 @@ router.post(
 
     validarCampos,
     validar_jwt,
-    esAdmin
+    // esAdmin
     ], 
     rutaPost
 );
