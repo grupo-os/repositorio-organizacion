@@ -33,7 +33,7 @@ const validar_jwt = (req = request, res = response, next) => {
             return user.id = id;
         });
 
-        // Se valida el usuario...
+        // Se valida la existencia del usuario...
         if (!user) {
             return res.status(401).json({
                 msg: 'Token inválido (El usuario no existe en la DB)'

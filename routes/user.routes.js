@@ -15,7 +15,7 @@ router.get('/get-user', rutaGet);
 router.post(
     '/create-user',
     
-    [body('username', 'El email ingresado no posee el formato correcto')
+    /* [body('username', 'El email ingresado no posee el formato correcto')
     .isEmail(),
 
     body('password', 'La contraseña debe tener como mínimo 8 caracteres')
@@ -26,16 +26,17 @@ router.post(
     body('role', 'El rol seleccionado no está permitido') 
     .custom(existeRole),
 
-    validarCampos,
-    validar_jwt,
+    // validarCampos,
+    // validar_jwt,
     // esAdmin
-    ], 
+    ],  */
     rutaPost
 );
 
 // Ruta para editar usuarios...
 router.put(
     '/edit-user/:id',
+    
     body('id', 'No es un id de MongoDB válido'),
     // .isMongoId(),
     
@@ -48,7 +49,6 @@ router.put(
     body('role', 'El rol seleccionado no está permitido')
     .isIn(['admin_user', 'common_user']),
 
-    
     validarCampos],
     
     rutaPut
