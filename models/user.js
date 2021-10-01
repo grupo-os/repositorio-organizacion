@@ -12,12 +12,30 @@ const UserSchema = new Schema({
     },
     activo: {
         type: Boolean,
-        default: true
+        default:true
     },
+    /* email: {
+        type: Boolean,
+        required: true,
+        unique: true
+    },
+    status: {
+        type: Boolean,
+        default: true
+    }, */
     role: {
         type: String,
-        required: true
+        required: true,
+        /* enum: ['ADMIN_ROLE', 'COMMON_ROLE'] */
     }
+},{
+    versionKey: false
 });
+
+UserSchema.methods.toJSON = function() {
+    const { password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
+    return usuario;
+};
 
 module.exports = model('User', UserSchema)

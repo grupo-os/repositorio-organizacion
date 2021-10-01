@@ -18,6 +18,7 @@ app.set('port', process.env.PORT || 5000);
 
 //Routes...
 app.use(require('./routes/user.routes')); 
+app.use(require('./routes/auth.routes')); 
 
 // Listen...
 app.listen(app.get("port"), () => 

@@ -8,13 +8,13 @@ const { existeRole } = require('../middlewares/validaciones');
 
 
 // Ruta que muestra todos los usuarios de la coleccion...
-router.get('/find-user', rutaGet);
+router.get('/get-user', rutaGet);
 
 // Ruta para agregar un nuevo usuario...
 router.post(
     '/create-user',
     
-    body('username', 'El email ingresado no posee el formato correcto')
+    [body('username', 'El email ingresado no posee el formato correcto')
     .isEmail(),
 
     body('password', 'La contraseña debe tener como mínimo 8 caracteres')
@@ -25,14 +25,20 @@ router.post(
     body('role', 'El rol seleccionado no está permitido') 
     .custom(existeRole),
 
-    validarCampos, 
+    validarCampos,
+    validar_jwt,
+    esAdmin
+    ], 
     rutaPost
 );
 
 // Ruta para editar usuarios...
 router.put(
-    '/edit-user/:id', 
-    body('username', 'El email ingresado no posee el formato correcto')
+    '/edit-user/:id',
+    body('id', 'No es un id de MongoDB válido'),
+    // .isMongoId(),
+    
+    [body('username', 'El email ingresado no posee el formato correcto')
     .isEmail(),
 
     body('password', 'La contraseña debe tener como mínimo 8 caracteres')
@@ -41,10 +47,9 @@ router.put(
     body('role', 'El rol seleccionado no está permitido')
     .isIn(['admin_user', 'common_user']),
 
-    body('id', 'No es un id de MongoDB válido')
-    .isMongoId(),
     
-    validarCampos,
+    validarCampos],
+    
     rutaPut
 );
 
